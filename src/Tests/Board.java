@@ -1,4 +1,4 @@
-package Testing;
+package Tests;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ public class Board {
     }
 
     public void addButton() {
-        JButton button = new JButton("Testing");
+        JButton button = new JButton("Tests");
         button.setBounds(100, 100, 100, 100);
         board.add(button);
     }

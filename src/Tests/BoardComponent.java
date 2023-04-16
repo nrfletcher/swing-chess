@@ -1,3 +1,5 @@
+package Tests;
+
 import javax.swing.*;
 import java.awt.*;
 

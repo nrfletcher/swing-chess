@@ -1,4 +1,6 @@
-import Testing.Board;
+package Graphics;
+
+import Tests.Board;
 
 public class Main {
 
