@@ -1,3 +1,5 @@
+package Testing;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -21,8 +23,7 @@ public class Board {
     }
 
     public void drawBoard() {
-        Square square = new Square();
-        board.add(square);
+
     }
 
     public void paint(Graphics g) {
