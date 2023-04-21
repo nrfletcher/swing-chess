@@ -1,41 +1,64 @@
 package Graphics;
 
-import Controller.ChessController;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+
+/*  BoardView is the view in the MVC architecture
+ *  All visuals are updated and created here
+ *  We extend JFrame to allow our BoardView to act as a JFrame
+ */
 
 public class BoardView extends JFrame {
 
-    private JTextField textField;
-    private JButton button;
-    private ChessController chessController;
+    JLabel scoreLabel;
+    JLabel whiteScore;
+    JLabel blackScore;
+    JScrollPane scrollPane;
+    JPanel scoreHolder;
+    JLabel movesLabel;
+    JTable moveTable;
+    JButton endGameButton;
+    JPanel leftSidePanel;
+
+    JLabel currentTurnLabel;
+    JLabel boardPlaceHolder;
+    JPanel rightSidePanel;
 
     public BoardView() {
-        textField = new JTextField("Testing");
-        button = new JButton("Click Me");
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                chessController.buttonHandler();
-            }
-        });
+        scoreLabel = createScoreLabel();
+        whiteScore = createWhiteScoreLabel();
+        blackScore = createBlackScoreLabel();
+        this.add(scoreLabel);
+        this.add(whiteScore);
+        this.add(blackScore);
 
-        this.add(textField);
-        this.add(button);
-        this.setSize(300, 300);
+        this.setTitle("Title");
+        this.setSize(1000, 1000);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
 
-    public void setChessController(ChessController chessController) {
-        this.chessController = chessController;
+    public JLabel createScoreLabel() {
+        JLabel label = new JLabel("Scores");
+        label.setFont(new Font("Georgia", Font.BOLD, 45));
+        label.setForeground(Color.getHSBColor(0.66f, 1.0f, 0.2f));
+        return label;
     }
 
-    public void setButtonText() {
-        this.button.setText("Changed");
+    public JLabel createWhiteScoreLabel() {
+        JLabel label = new JLabel("White Score");
+        label.setFont(new Font("Georgia", Font.BOLD, 45));
+        label.setForeground(Color.getHSBColor(0.66f, 1.0f, 0.2f));
+        return label;
+    }
+
+    public JLabel createBlackScoreLabel() {
+        JLabel label = new JLabel("Black Score");
+        label.setFont(new Font("Georgia", Font.BOLD, 45));
+        label.setForeground(Color.getHSBColor(0.66f, 1.0f, 0.2f));
+        return label;
     }
 
 }

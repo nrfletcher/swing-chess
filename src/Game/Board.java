@@ -1,6 +1,12 @@
 package Game;
 
-public class BoardStatus {
+/*  Main class for defining logic
+ *  Interacts with all piece classes, changing board status when necessary
+ *  Board should have no interactions or knowledge of anything outside the Game package
+ *  Board is our model in the MVC structure
+ */
+
+public class Board {
 
     public int[][] boardPositions;
     private final int NO_PIECE = 12;
@@ -19,7 +25,7 @@ public class BoardStatus {
     private final int BLACK_QUEEN = 10;
     private final int BLACK_KING = 11;
 
-    public BoardStatus() {
+    public Board() {
         this.boardPositions = new int[8][8];
     }
 
