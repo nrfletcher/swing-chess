@@ -1,5 +1,8 @@
 package Tests;
 import java.awt.*;
+import java.io.File;
+import java.util.Objects;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 public class Board {
     JFrame f;
@@ -10,6 +13,12 @@ public class Board {
         JButton b1=new JButton("1");
         JButton b2=new JButton("2");
         JButton b3=new JButton("3");
+        try {
+            Image img = ImageIO.read(new File("images/black_bishop.png"));
+            b3.setIcon(new ImageIcon(img));
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
         JButton b4=new JButton("4");
         JButton b5=new JButton("5");
         JButton b6=new JButton("6");
@@ -32,5 +41,37 @@ public class Board {
     }
     public static void main(String[] args) {
         new Board();
+    }
+
+    public void initializeBoard() {
+        // Set up the size of the chess board
+        //int width = getWidth();
+        //int height = getHeight();
+        //int squareSize = Math.min(width, height) / 8;
+
+
+        // Draw the chess board squares
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                JButton button = new JButton();
+                if ((row + col) % 2 == 0) {
+                    //button.setBackground(lightSquareColor);
+                } else {
+                    //button.setBackground(darkSquareColor);
+                }
+
+                //button.setBounds(col * squareSize, row * squareSize, squareSize, squareSize);
+                try {
+                    Image img = ImageIO.read(new File("images/black_bishop.png"));
+                    button.setIcon(new ImageIcon(img));
+                    button.setBorderPainted(false);
+                    button.setBackground(Color.GREEN);
+
+                    //this.add(button);
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
     }
 }

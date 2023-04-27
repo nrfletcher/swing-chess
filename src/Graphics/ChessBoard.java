@@ -1,12 +1,11 @@
 package Graphics;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class ChessBoard extends JPanel {
 
@@ -26,15 +25,26 @@ public class ChessBoard extends JPanel {
         int height = getHeight();
         int squareSize = Math.min(width, height) / 8;
 
+
         // Draw the chess board squares
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
+                JButton button = new JButton();
                 if ((row + col) % 2 == 0) {
-                    g.setColor(lightSquareColor);
+                    button.setBackground(lightSquareColor);
                 } else {
-                    g.setColor(darkSquareColor);
+                    button.setBackground(darkSquareColor);
                 }
-                g.fillRect(col * squareSize, row * squareSize, squareSize, squareSize);
+
+                button.setBounds(col * squareSize, row * squareSize, squareSize, squareSize);
+                try {
+                    Image img = ImageIO.read(new File("images/black_bishop.png"));
+                    button.setIcon(new ImageIcon(img));
+                    button.setBorderPainted(false);
+                    this.add(button);
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                }
             }
         }
     }

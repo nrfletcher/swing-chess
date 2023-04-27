@@ -27,3 +27,11 @@ Tomorrow --> Figure out painting via Graphics2D
          --> Get 8x8 board painted properly
          --> Find chess piece images for positions
          --> Have images go onto board
+
+
+For 4/27 ->
+    Make new board be repainted each time, via sending the current board iteration to the board view and
+    setting up the visuals based off that data
+
+    Once that is done set up the controller so that every button has a handler
+    These handlers will allow us to make piece moves and check for current allowed moves (based off turn)

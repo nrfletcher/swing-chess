@@ -7,5 +7,6 @@ package Game;
 public interface Piece {
     int[][] getLegalMoves();
     int getPieceValue();
-    String getPieceName();
+    String getPieceType();
+    String getPieceColor();
 }
