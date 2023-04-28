@@ -1,16 +1,13 @@
 package Game;
 
-public class King implements Piece {
+public class Empty implements Piece {
 
-    private final String color;
-
-    public King(String color) {
-        this.color = color;
+    public Empty() {
     }
 
     @Override
     public int[][] getLegalMoves() {
-        return new int[0][];
+        return null;
     }
 
     @Override
@@ -20,11 +17,11 @@ public class King implements Piece {
 
     @Override
     public String getPieceType() {
-        return "KING";
+        return "EMPTY";
     }
 
     @Override
     public String getPieceColor() {
-        return this.color;
+        return "NULL";
     }
 }

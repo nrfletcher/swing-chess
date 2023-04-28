@@ -1,5 +1,7 @@
 package Graphics;
 
+import Game.Piece;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -7,13 +9,24 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/*  ChessBoard is our visual chess board representation
+ *  Complex logic warranted a separate class
+ *  Initially the boardStatus is sent to a chessBoard on program launch
+ *  For each user action resulting in a moved piece, a new board is created and updated onto GUI
+ */
+
 public class ChessBoard extends JPanel {
 
     private final Color lightSquareColor = new Color(163, 214, 245);
     private final Color darkSquareColor = new Color(102, 167, 197);
+    private final Color backgroundColor = new Color(110, 160, 205);
 
-    ChessBoard() {
-        setPreferredSize(new Dimension(600, 600));
+    private Piece[][] currentGameBoard;
+
+    public ChessBoard(Piece[][] currentGameBoard) {
+        this.currentGameBoard = currentGameBoard;
+        setPreferredSize(new Dimension(700, 700));
+        //setBackground(backgroundColor);
     }
 
     @Override
@@ -25,10 +38,10 @@ public class ChessBoard extends JPanel {
         int height = getHeight();
         int squareSize = Math.min(width, height) / 8;
 
-
         // Draw the chess board squares
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
+                // New button for each position -> because event handler
                 JButton button = new JButton();
                 if ((row + col) % 2 == 0) {
                     button.setBackground(lightSquareColor);
@@ -36,15 +49,29 @@ public class ChessBoard extends JPanel {
                     button.setBackground(darkSquareColor);
                 }
 
-                button.setBounds(col * squareSize, row * squareSize, squareSize, squareSize);
                 try {
-                    Image img = ImageIO.read(new File("images/black_bishop.png"));
-                    button.setIcon(new ImageIcon(img));
-                    button.setBorderPainted(false);
-                    this.add(button);
-                } catch (Exception ex) {
-                    System.out.println(ex);
+                    try {
+                        // Get color and type of given position and find image
+                        String pieceColor = currentGameBoard[row][col].getPieceColor().toLowerCase();
+                        String pieceType = currentGameBoard[row][col].getPieceType().toLowerCase();
+
+                        if(pieceType.equals("empty")) {
+                            // For empty, just paint - no image (transparent)
+                            button.setBorderPainted(false);
+                        } else {
+                            Image img = ImageIO.read(new File("images/" + pieceColor + "_" + pieceType +".png"));
+                            button.setIcon(new ImageIcon(img));
+                            button.setBorderPainted(false);
+                        }
+
+                        this.add(button);
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                } catch (Exception e) {
+                    System.err.println(e);
                 }
+                button.setBounds(col * squareSize, row * squareSize, squareSize, squareSize);
             }
         }
     }

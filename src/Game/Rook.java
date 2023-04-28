@@ -1,10 +1,10 @@
 package Game;
 
-public class King implements Piece {
+public class Rook implements Piece {
 
     private final String color;
 
-    public King(String color) {
+    public Rook(String color) {
         this.color = color;
     }
 
@@ -20,7 +20,7 @@ public class King implements Piece {
 
     @Override
     public String getPieceType() {
-        return "KING";
+        return "ROOK";
     }
 
     @Override

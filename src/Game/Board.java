@@ -8,7 +8,8 @@ package Game;
 
 public class Board {
 
-    public int[][] boardPositions;
+    private Piece[][] currentBoardStatus;
+
     private final int NO_PIECE = 12;
 
     private final int WHITE_PAWN = 0;
@@ -26,40 +27,33 @@ public class Board {
     private final int BLACK_KING = 11;
 
     public Board() {
-        this.boardPositions = new int[8][8];
+        this.currentBoardStatus = new Piece[8][8];
+        newGamePiecePositions();
     }
 
     public void newGamePiecePositions() {
-        this.boardPositions = new int[][]{
-                {BLACK_ROOK, BLACK_KNIGHT, BLACK_BISHOP, BLACK_KING, BLACK_QUEEN, BLACK_BISHOP, BLACK_KNIGHT, BLACK_ROOK},
-                {BLACK_PAWN, BLACK_PAWN, BLACK_PAWN, BLACK_PAWN, BLACK_PAWN, BLACK_PAWN, BLACK_PAWN, BLACK_PAWN},
-                {NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE},
-                {NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE},
-                {NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE},
-                {NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE, NO_PIECE},
-                {WHITE_PAWN, WHITE_PAWN, WHITE_PAWN, WHITE_PAWN, WHITE_PAWN, WHITE_PAWN, WHITE_PAWN, WHITE_PAWN},
-                {WHITE_ROOK, WHITE_KNIGHT, WHITE_BISHOP, WHITE_KING, WHITE_QUEEN, WHITE_BISHOP, WHITE_KNIGHT, WHITE_ROOK},
+        // Initialize board with starting positions
+        this.currentBoardStatus = new Piece[][]{
+                {new Rook("Black"), new Knight("Black"), new Bishop("Black"), new Queen("Black"),
+                        new King("Black"), new Bishop("Black"), new Knight("Black"), new Rook("Black")},
+                {new Pawn("Black"), new Pawn("Black"), new Pawn("Black"), new Pawn("Black"),
+                        new Pawn("Black"), new Pawn("Black"), new Pawn("Black"), new Pawn("Black")},
+                {new Empty(), new Empty(), new Empty(), new Empty(),
+                        new Empty(), new Empty(), new Empty(), new Empty()},
+                {new Empty(), new Empty(), new Empty(), new Empty(),
+                        new Empty(), new Empty(), new Empty(), new Empty()},
+                {new Empty(), new Empty(), new Empty(), new Empty(),
+                        new Empty(), new Empty(), new Empty(), new Empty()},
+                {new Empty(), new Empty(), new Empty(), new Empty(),
+                        new Empty(), new Empty(), new Empty(), new Empty()},
+                {new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White"),
+                        new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White")},
+                {new Rook("White"), new Knight("White"), new Bishop("White"), new Queen("White"),
+                        new King("White"), new Bishop("White"), new Knight("White"), new Rook("White")},
         };
     }
 
-    public void getCurrentPiecePositionsNumerically() {
-        for(int i = 0; i < 8; i++) {
-            System.out.println();
-            for(int j = 0; j < 8; j++) {
-                System.out.print(boardPositions[i][j]);
-            }
-        }
-    }
-
-    private final String[] pieceValuesAsNames = {"W_PAWN", "W_ROOK", "W_BISHOP", "W_KNIGHT", "W_QUEEN", "W_KING",
-        "B_PAWN", "B_ROOK", "B_BISHOP", "B_KNIGHT", "B_QUEEN", "B_KING", "NONE"};
-
-    public void getCurrentPiecePositionNames() {
-        for(int i = 0; i < 8; i++) {
-            System.out.println();
-            for(int j = 0; j < 8; j++) {
-                System.out.print(pieceValuesAsNames[boardPositions[i][j]] + " ");
-            }
-        }
+    public Piece[][] getCurrentBoardStatus() {
+        return currentBoardStatus;
     }
 }

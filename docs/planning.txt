@@ -35,3 +35,6 @@ For 4/27 ->
 
     Once that is done set up the controller so that every button has a handler
     These handlers will allow us to make piece moves and check for current allowed moves (based off turn)
+
+    Right now: make all classes for pieces -> make a board representation holding those pieces -> create board based off
+    of the current version of the board using the pieces and color types
