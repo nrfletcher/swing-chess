@@ -1,8 +1,8 @@
 package Main;
 
 import Controller.ChessController;
-import Graphics.BoardView;
 import Game.Board;
+import Graphics.BoardView;
 import Graphics.ChessBoard;
 
 /*  Game class is the origin for a new game

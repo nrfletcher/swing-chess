@@ -2,8 +2,12 @@ package Graphics;
 
 import Game.Piece;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /*  BoardView is the view in the MVC architecture
  *  All visuals are updated and created here
@@ -24,7 +28,7 @@ public class BoardView extends JFrame {
     JButton endGameButton;
 
     JLabel currentTurnLabel;
-    JPanel chessBoard;
+    ChessBoard chessBoard;
 
     JPanel gamePanel;
 
@@ -39,29 +43,30 @@ public class BoardView extends JFrame {
         endGameButton = createEndGameButton();
         currentTurnLabel = createTurnLabel();
         this.chessBoard = chessBoard;
+        this.chessBoard.setBackground(backgroundColor);
 
         // add -> panel, component, x, y, width, height
         gamePanel = new JPanel(new GridBagLayout());
         gamePanel.setBackground(backgroundColor);
 
-        add(gamePanel, scoreLabel, 0, 0, 1, 1);
-        add(gamePanel, whiteScore, 0, 1, 1, 1);
-        add(gamePanel, blackScore, 0, 2, 1, 1);
-        add(gamePanel, moveTable, 0, 4, 1, 1);
-        add(gamePanel, movesLabel, 0, 3, 1, 1);
-        add(gamePanel, endGameButton, 0, 5, 1, 1);
-        add(gamePanel, currentTurnLabel, 1, 0, 1, 1);
+        add(gamePanel, scoreLabel, 0, 0, 1, 1, 10);
+        add(gamePanel, whiteScore, 0, 1, 1, 1, 10);
+        add(gamePanel, blackScore, 0, 2, 1, 1, 10);
+        add(gamePanel, moveTable, 0, 4, 1, 1, 10);
+        add(gamePanel, movesLabel, 0, 3, 1, 1, 10);
+        add(gamePanel, endGameButton, 0, 5, 1, 1, 10);
+        add(gamePanel, currentTurnLabel, 1, 0, 1, 1, 50);
         addChessBoard(gamePanel, chessBoard, 1, 1, 5, 5);
         this.add(gamePanel);
 
-        this.setTitle("Title");
+        this.setTitle("Blue Chess");
         this.setSize(1400, 1000);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
 
-    public static void add(JPanel panel, JComponent comp, int x, int y, int width, int height) {
+    public static void add(JPanel panel, JComponent comp, int x, int y, int width, int height, int inset) {
         /*  Gridbag constrains
          *  gridx -> column of component
          *  gridy -> row of component
@@ -76,7 +81,7 @@ public class BoardView extends JFrame {
         constr.gridy = y;
         constr.gridheight = height;
         constr.gridwidth = width;
-        constr.insets = new Insets(10, 10, 10, 10);
+        constr.insets = new Insets(inset, inset, inset, inset);
         constr.anchor = GridBagConstraints.CENTER;
         constr.fill = GridBagConstraints.BOTH;
         constr.ipadx = 15;
@@ -103,6 +108,7 @@ public class BoardView extends JFrame {
         label.setBackground(lightBlue);
         label.setOpaque(true);
         label.setVerticalAlignment(SwingConstants.CENTER);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         return label;
     }
 
@@ -145,6 +151,8 @@ public class BoardView extends JFrame {
         label.setForeground(Color.getHSBColor(0.66f, 1.0f, 0.2f));
         label.setBackground(lightBlue);
         label.setOpaque(true);
+        label.setVerticalAlignment(SwingConstants.CENTER);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         return label;
     }
 
@@ -166,6 +174,8 @@ public class BoardView extends JFrame {
         label.setForeground(Color.getHSBColor(0.66f, 1.0f, 0.2f));
         label.setBackground(lightBlue);
         label.setOpaque(true);
+        label.setVerticalAlignment(SwingConstants.CENTER);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         return label;
     }
 
@@ -173,4 +183,25 @@ public class BoardView extends JFrame {
         this.chessBoard = new ChessBoard(board);
     }
 
+    public ChessBoard getCurrentBoardStatus() {
+        return this.chessBoard;
+    }
+
+    public void setCurrentTurnLabel(String turn) {
+        this.currentTurnLabel.setText("Current Turn: " + turn);
+    }
+
+    public void setCurrentBlackScore(int score) {
+        this.whiteScore.setText("White Score: " + score);
+    }
+
+    public void setCurrentWhiteScore(int score) {
+        this.blackScore.setText("Black Score: " + score);
+    }
+
+    public void setFrameIcon() throws IOException {
+        BufferedImage image = ImageIO.read(new File("images/black_bishop.png"));
+        ImageIcon icon = new ImageIcon(image);
+        this.setIconImage(icon.getImage());
+    }
 }

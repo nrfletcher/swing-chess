@@ -9,6 +9,9 @@ package Game;
 public class Board {
 
     private Piece[][] currentBoardStatus;
+    private String currentTurn;
+    private int currentWhiteScore;
+    private int currentBlackScore;
 
     private final int NO_PIECE = 12;
 
@@ -28,6 +31,9 @@ public class Board {
 
     public Board() {
         this.currentBoardStatus = new Piece[8][8];
+        this.currentTurn = "White";
+        this.currentWhiteScore = 0;
+        this.currentBlackScore = 0;
         newGamePiecePositions();
     }
 
@@ -55,5 +61,29 @@ public class Board {
 
     public Piece[][] getCurrentBoardStatus() {
         return currentBoardStatus;
+    }
+
+    public String getCurrentTurn() {
+        return this.currentTurn;
+    }
+
+    public void setCurrentTurn(String turn) {
+        this.currentTurn = turn;
+    }
+
+    public void setCurrentBlackScore(int score) {
+        this.currentBlackScore = score;
+    }
+
+    public void setCurrentWhiteScore(int score) {
+        this.currentWhiteScore = score;
+    }
+
+    public int getCurrentWhiteScore() {
+        return this.currentWhiteScore;
+    }
+
+    public int getCurrentBlackScore() {
+        return this.currentBlackScore;
     }
 }

@@ -5,9 +5,11 @@ import Game.Piece;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 /*  ChessBoard is our visual chess board representation
  *  Complex logic warranted a separate class
@@ -22,11 +24,12 @@ public class ChessBoard extends JPanel {
     private final Color backgroundColor = new Color(110, 160, 205);
 
     private Piece[][] currentGameBoard;
+    private JButton[][] boardButtons;
 
     public ChessBoard(Piece[][] currentGameBoard) {
         this.currentGameBoard = currentGameBoard;
+        this.boardButtons = new JButton[8][8];
         setPreferredSize(new Dimension(700, 700));
-        //setBackground(backgroundColor);
     }
 
     @Override
@@ -41,8 +44,10 @@ public class ChessBoard extends JPanel {
         // Draw the chess board squares
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                // New button for each position -> because event handler
+
+                // New button for each position -> add event handler
                 JButton button = new JButton();
+
                 if ((row + col) % 2 == 0) {
                     button.setBackground(lightSquareColor);
                 } else {
@@ -71,7 +76,10 @@ public class ChessBoard extends JPanel {
                 } catch (Exception e) {
                     System.err.println(e);
                 }
+
                 button.setBounds(col * squareSize, row * squareSize, squareSize, squareSize);
+                boardButtons[row][col] = button;
+
             }
         }
     }
@@ -80,5 +88,18 @@ public class ChessBoard extends JPanel {
         BufferedImage image = ImageIO.read(new File("images/black_bishop.png"));
         ImageIcon icon = new ImageIcon(image);
         return new JLabel(icon);
+    }
+
+    public JButton[][] getBoardButtons() {
+        return this.boardButtons;
+    }
+
+    public void setButtonListeners(ActionListener listener) {
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                System.out.println(Arrays.deepToString(boardButtons));
+                boardButtons[row][col].addActionListener(listener);
+            }
+        }
     }
 }
