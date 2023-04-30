@@ -6,9 +6,12 @@ package Game;
  *  Board is our model in the MVC structure
  */
 
+import java.util.ArrayList;
+
 public class Board {
 
     private Piece[][] currentBoardStatus;
+    private ArrayList<Move> validMoves;
     private String currentTurn;
     private int currentWhiteScore;
     private int currentBlackScore;
@@ -31,6 +34,7 @@ public class Board {
 
     public Board() {
         this.currentBoardStatus = new Piece[8][8];
+        this.validMoves = new ArrayList<>();
         this.currentTurn = "White";
         this.currentWhiteScore = 0;
         this.currentBlackScore = 0;
@@ -85,5 +89,13 @@ public class Board {
 
     public int getCurrentBlackScore() {
         return this.currentBlackScore;
+    }
+
+    public void addValidMove(Move move) {
+        this.validMoves.add(move);
+    }
+
+    public ArrayList<Move> getValidMoves() {
+        return this.validMoves;
     }
 }

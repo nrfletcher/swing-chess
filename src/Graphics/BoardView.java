@@ -29,9 +29,7 @@ public class BoardView extends JFrame {
 
     JLabel currentTurnLabel;
     ChessBoard chessBoard;
-
     JPanel gamePanel;
-
 
     public BoardView(ChessBoard chessBoard) {
 
@@ -142,6 +140,7 @@ public class BoardView extends JFrame {
         table.setGridColor(darkBlue);
         scrollPane = new JScrollPane(table);
         scrollPane.getViewport().setBackground(darkBlue);
+        scrollPane.setFont(new Font("Georgia", Font.BOLD, 20));
         return scrollPane;
     }
 

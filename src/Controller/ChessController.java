@@ -3,6 +3,7 @@ package Controller;
 import Game.Board;
 import Graphics.BoardView;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,14 +23,28 @@ public class ChessController {
         this.boardView.setCurrentTurnLabel(boardStatus.getCurrentTurn());
         this.boardView.setCurrentBlackScore(boardStatus.getCurrentBlackScore());
         this.boardView.setCurrentWhiteScore(boardStatus.getCurrentWhiteScore());
-        this.boardView.getCurrentBoardStatus().setButtonListeners(new ButtonListener());
+        this.boardView.getCurrentBoardStatus().setButtonListener(new ButtonListener());
     }
 
-    class ButtonListener implements ActionListener {
+    public class ButtonListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Clicked");
+
+            /* Get our button row and column */
+            JButton clickedButton = (JButton) e.getSource();
+            String pos = clickedButton.getName();
+            int row = Integer.parseInt(pos.split(" ")[0]);
+            int col = Integer.parseInt(pos.split(" ")[1]);
+            String pieceType = boardStatus.getCurrentBoardStatus()[row][col].getPieceType();
+            String pieceColor = boardStatus.getCurrentBoardStatus()[row][col].getPieceColor();
+
+            if(boardStatus.getCurrentTurn().equalsIgnoreCase(pieceColor)) {
+
+            } else {
+                System.out.println("Incorrect Turn");
+            }
+
         }
     }
-
 }

@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 /*  ChessBoard is our visual chess board representation
  *  Complex logic warranted a separate class
@@ -22,6 +21,7 @@ public class ChessBoard extends JPanel {
     private final Color lightSquareColor = new Color(163, 214, 245);
     private final Color darkSquareColor = new Color(102, 167, 197);
     private final Color backgroundColor = new Color(110, 160, 205);
+    private ActionListener buttonListener;
 
     private Piece[][] currentGameBoard;
     private JButton[][] boardButtons;
@@ -78,8 +78,10 @@ public class ChessBoard extends JPanel {
                 }
 
                 button.setBounds(col * squareSize, row * squareSize, squareSize, squareSize);
+                /* Add our listener (same listener for all values, and set coordinate, so we can find button */
+                button.addActionListener(buttonListener);
+                button.setName(row + " " + col);
                 boardButtons[row][col] = button;
-
             }
         }
     }
@@ -94,12 +96,7 @@ public class ChessBoard extends JPanel {
         return this.boardButtons;
     }
 
-    public void setButtonListeners(ActionListener listener) {
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                System.out.println(Arrays.deepToString(boardButtons));
-                boardButtons[row][col].addActionListener(listener);
-            }
-        }
+    public void setButtonListener(ActionListener actionListener) {
+        this.buttonListener = actionListener;
     }
 }
