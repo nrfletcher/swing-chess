@@ -1,12 +1,14 @@
 package Game;
 
+import java.util.ArrayList;
+
 public class Empty implements Piece {
 
     public Empty() {
     }
 
     @Override
-    public int[][] getLegalMoves() {
+    public ArrayList<Move> getLegalMoves(Piece[][] currentBoard, int row, int col) {
         return null;
     }
 

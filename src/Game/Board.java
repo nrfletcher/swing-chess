@@ -15,6 +15,11 @@ public class Board {
     private String currentTurn;
     private int currentWhiteScore;
     private int currentBlackScore;
+    private boolean blackFirstMoveMade = false;
+    private boolean whiteFirstMoveMade = false;
+    private int lastX;
+    private int lastY;
+    private Piece lastPieceType;
 
     private final int NO_PIECE = 12;
 
@@ -35,7 +40,7 @@ public class Board {
     public Board() {
         this.currentBoardStatus = new Piece[8][8];
         this.validMoves = new ArrayList<>();
-        this.currentTurn = "White";
+        this.currentTurn = "white";
         this.currentWhiteScore = 0;
         this.currentBlackScore = 0;
         newGamePiecePositions();
@@ -61,6 +66,13 @@ public class Board {
                 {new Rook("White"), new Knight("White"), new Bishop("White"), new Queen("White"),
                         new King("White"), new Bishop("White"), new Knight("White"), new Rook("White")},
         };
+    }
+
+    public boolean isValidMove(Move move) {
+        for(Move currMove : validMoves) {
+            if(currMove.getY() == move.getY() && currMove.getX() == move.getX()) return true;
+        }
+        return false;
     }
 
     public Piece[][] getCurrentBoardStatus() {
@@ -97,5 +109,45 @@ public class Board {
 
     public ArrayList<Move> getValidMoves() {
         return this.validMoves;
+    }
+
+    public void blackHasMoved() {
+        this.blackFirstMoveMade = true;
+    }
+
+    public void whiteHasMoved() {
+        this.whiteFirstMoveMade = true;
+    }
+
+    public boolean hasWhiteMoved() {
+        return this.whiteFirstMoveMade;
+    }
+
+    public boolean hasBlackMoved() {
+        return this.blackFirstMoveMade;
+    }
+
+    public int getLastX() {
+        return this.lastX;
+    }
+
+    public int getLastY() {
+        return this.lastY;
+    }
+
+    public Piece getLastPieceType() {
+        return this.lastPieceType;
+    }
+
+    public void setLastX(int x) {
+        this.lastX = x;
+    }
+
+    public void setLastY(int y) {
+        this.lastY = y;
+    }
+
+    public void setLastPieceType(Piece pieceType) {
+        this.lastPieceType = pieceType;
     }
 }

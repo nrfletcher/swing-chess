@@ -1,5 +1,7 @@
 package Game;
 
+import java.util.ArrayList;
+
 public class Queen implements Piece {
 
     private final String color;
@@ -9,8 +11,9 @@ public class Queen implements Piece {
     }
 
     @Override
-    public int[][] getLegalMoves() {
-        return new int[0][];
+    public ArrayList<Move> getLegalMoves(Piece[][] currentBoard, int row, int col) {
+        ArrayList<Move> legalMoves = new ArrayList<>();
+        return legalMoves;
     }
 
     @Override

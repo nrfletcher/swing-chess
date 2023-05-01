@@ -1,5 +1,7 @@
 package Game;
 
+import java.util.ArrayList;
+
 public class Pawn implements Piece {
 
     private final String color;
@@ -9,8 +11,14 @@ public class Pawn implements Piece {
     }
 
     @Override
-    public int[][] getLegalMoves() {
-        return new int[0][];
+    public ArrayList<Move> getLegalMoves(Piece[][] currentBoard, int row, int col) {
+        ArrayList<Move> legalMoves = new ArrayList<>();
+
+
+        /* For testing purposes - remove after final product */
+        legalMoves.add(new Move(0, 3));
+
+        return legalMoves;
     }
 
     @Override
