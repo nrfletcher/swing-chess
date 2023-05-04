@@ -40,7 +40,7 @@ public class Board {
     public Board() {
         this.currentBoardStatus = new Piece[8][8];
         this.validMoves = new ArrayList<>();
-        this.currentTurn = "white";
+        this.currentTurn = "White";
         this.currentWhiteScore = 0;
         this.currentBlackScore = 0;
         newGamePiecePositions();

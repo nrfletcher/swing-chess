@@ -179,7 +179,9 @@ public class BoardView extends JFrame {
     }
 
     public void setCurrentBoardStatus(Piece[][] board) {
+        this.chessBoard.removeAll();
         this.chessBoard = new ChessBoard(board);
+        repaint();
     }
 
     public ChessBoard getCurrentBoardStatus() {
