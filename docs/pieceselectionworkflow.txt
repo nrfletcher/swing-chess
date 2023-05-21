@@ -1,0 +1,17 @@
+Logic flow of clicking on a position:
+
+if new game:
+    set white as current turn:
+        if white clicks white piece:
+            set validMoves = valid moves for that piece:
+                redraw board with valid moves:
+                    if user clicks on valid move:
+                        move piece (redraw board), reset validMoves, change turn to black, go again
+                    if user clicks on other piece:
+                        clear validMoves
+                        generate new validMoves
+                        refresh board
+                    if user clicks on opp color || empty:
+                        do nothing, remain as current turn
+        if white clicks empty or black piece:
+            do nothing, remain as white turn

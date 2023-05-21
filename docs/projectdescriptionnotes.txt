@@ -1,0 +1,4 @@
+Good general overview for describing project:
+
+Utilized Java Swing library to create graphics
+Implemented MVC design pattern

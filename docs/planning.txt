@@ -1,0 +1,46 @@
+MVC Pattern
+- Separation of concerns allows us to organize code efficiently and add features easier
+
+Model --> Game state and logic: board and where are pieces located, making appropriate moves, finding checkmates
+
+View --> Swing graphics: looking at game state and repainting whenever a new event occurs
+
+Controller --> User input: update model and view when actions take place
+
+Listen for events:
+- Player clicks on piece --> locate valid positions and mark which positions are valid, disallow any others
+- Player moves piece --> scan for checkmates and switch player turn
+- Checkmate --> disallow or notify user that a typically valid move is 'checkmate'
+- Game ends --> checkmate has been found with no escape, game ends
+- Checkmate from opposing position --> player must be notified that it is checkmate and must move (if applicable)
+
+
+For each piece:
+--> Generate valid moves by sending it a current existence of map
+
+
+Valid moves:
+--> Send piece current view of pieces
+    --> Check each valid position (out of bounds not valid, same color not valid, if king not checkmate)
+
+Tomorrow --> Figure out painting via Graphics2D
+         --> Get 8x8 board painted properly
+         --> Find chess piece images for positions
+         --> Have images go onto board
+
+
+For 4/27 ->
+    Make new board be repainted each time, via sending the current board iteration to the board view and
+    setting up the visuals based off that data
+
+    Once that is done set up the controller so that every button has a handler
+    These handlers will allow us to make piece moves and check for current allowed moves (based off turn)
+
+    Right now: make all classes for pieces -> make a board representation holding those pieces -> create board based off
+    of the current version of the board using the pieces and color types
+
+For 5/21 ->
+    Integrate project into Gradle
+    Create unit tests
+    Successfully build and run unit tests
+    Replace all printlines (not testing) with Loggers and have Loggers functioning properly
