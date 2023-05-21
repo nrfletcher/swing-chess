@@ -1,9 +1,9 @@
-package Tests;
+package Workspace;
 import java.awt.*;
 import java.io.File;
-import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 public class Board {
     JFrame f;
     Board (){

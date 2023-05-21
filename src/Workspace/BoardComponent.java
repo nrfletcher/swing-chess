@@ -1,4 +1,4 @@
-package Tests;
+package Workspace;
 
 import javax.swing.*;
 import java.awt.*;

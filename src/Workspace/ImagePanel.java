@@ -1,4 +1,4 @@
-package Tests;
+package Workspace;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
