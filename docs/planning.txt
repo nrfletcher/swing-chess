@@ -38,3 +38,9 @@ For 4/27 ->
 
     Right now: make all classes for pieces -> make a board representation holding those pieces -> create board based off
     of the current version of the board using the pieces and color types
+
+For 5/21 ->
+    Integrate project into Gradle
+    Create unit tests
+    Successfully build and run unit tests
+    Replace all printlines (not testing) with Loggers and have Loggers functioning properly
