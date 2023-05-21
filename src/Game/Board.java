@@ -4,6 +4,8 @@ package Game;
  *  Interacts with all piece classes, changing board status when necessary
  *  Board should have no interactions or knowledge of anything outside the Game package
  *  Board is our model in the MVC structure
+ *  @author nrileyfletcher
+ *  @brief  Logic representation of the chess board
  */
 
 import java.util.ArrayList;

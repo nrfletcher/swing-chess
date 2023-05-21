@@ -2,6 +2,9 @@ package Game;
 
 import java.util.ArrayList;
 
+/* @author nrileyfletcher
+ * @brief Bishop piece implementation
+ */
 public class Bishop implements Piece {
 
     private final String color;

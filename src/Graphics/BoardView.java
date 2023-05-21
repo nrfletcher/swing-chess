@@ -12,6 +12,8 @@ import java.io.IOException;
 /*  BoardView is the view in the MVC architecture
  *  All visuals are updated and created here
  *  We extend JFrame to allow our BoardView to act as a JFrame
+ *  @author nrileyfletcher
+ *  @brief Graphical representation of chess board
  */
 
 public class BoardView extends JFrame {

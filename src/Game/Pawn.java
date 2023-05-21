@@ -2,6 +2,9 @@ package Game;
 
 import java.util.ArrayList;
 
+/* @author nrileyfletcher
+ * @brief Pawn piece implementation
+ */
 public class Pawn implements Piece {
 
     private final String color;

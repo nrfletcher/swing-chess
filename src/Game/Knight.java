@@ -2,6 +2,9 @@ package Game;
 
 import java.util.ArrayList;
 
+/* @author nrileyfletcher
+ * @brief Knight piece implementation
+ */
 public class Knight implements Piece {
 
     private final String color;

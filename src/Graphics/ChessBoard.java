@@ -14,6 +14,8 @@ import java.io.IOException;
  *  Complex logic warranted a separate class
  *  Initially the boardStatus is sent to a chessBoard on program launch
  *  For each user action resulting in a moved piece, a new board is created and updated onto GUI
+ *  @author nrileyfletcher
+ *  @brief  Handling changes in BoardView
  */
 
 public class ChessBoard extends JPanel {

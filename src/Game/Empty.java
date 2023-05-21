@@ -2,6 +2,9 @@ package Game;
 
 import java.util.ArrayList;
 
+/* @author nrileyfletcher
+ * @brief Empty board position
+ */
 public class Empty implements Piece {
 
     public Empty() {

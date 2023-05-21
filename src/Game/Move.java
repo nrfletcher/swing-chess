@@ -1,5 +1,8 @@
 package Game;
 
+/* @author nrileyfletcher
+ * @brief A move is a xy coordinate pair on the chess board
+ */
 public class Move {
 
     private final int x;
