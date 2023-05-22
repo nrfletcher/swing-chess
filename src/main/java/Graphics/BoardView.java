@@ -1,5 +1,6 @@
 package Graphics;
 
+import Game.Move;
 import Game.Piece;
 
 import javax.imageio.ImageIO;
@@ -8,6 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /*  BoardView is the view in the MVC architecture
  *  All visuals are updated and created here
@@ -180,9 +182,16 @@ public class BoardView extends JFrame {
         return label;
     }
 
-    public void setCurrentBoardStatus(Piece[][] board) {
+    public void setCurrentBoardStatus(Piece[][] board, ArrayList<Move> moves) {
         this.chessBoard.removeAll();
-        this.chessBoard = new ChessBoard(board);
+        this.chessBoard = new ChessBoard(board, moves);
+        repaint();
+    }
+
+    public void displayValidMoves(Piece[][] board, ArrayList<Move> validMoves) {
+        this.chessBoard.setValidMoves(validMoves);
+        this.chessBoard.removeAll();
+        this.chessBoard = new ChessBoard(board, validMoves);
         repaint();
     }
 

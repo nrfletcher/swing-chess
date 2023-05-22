@@ -49,7 +49,6 @@ public class ChessController {
             String pieceColor = boardStatus.getCurrentBoardStatus()[row][col].getPieceColor();
 
             System.out.println(row + " " + col);
-            System.out.println("yo");
 
             if(boardStatus.getCurrentTurn().equalsIgnoreCase(pieceColor)) {
                 System.out.println("Current color");
@@ -63,16 +62,19 @@ public class ChessController {
                         getLegalMoves(boardStatus.getCurrentBoardStatus(), row, col);
 
                 for(Move move : legalMoves) {
+                    System.out.println(move);
                     boardStatus.getValidMoves().add(move);
                 }
 
+                boardView.setCurrentBoardStatus(boardStatus.getCurrentBoardStatus(), boardStatus.getValidMoves());
+
             } else if(boardStatus.isValidMove(new Move(row, col))) {
-                System.out.println("Valid move occured");
+                System.out.println("Valid move occurred");
 
                 boardStatus.getCurrentBoardStatus()[boardStatus.getLastX()][boardStatus.getLastY()] = new Empty();
                 boardStatus.getCurrentBoardStatus()[row][col] = boardStatus.getLastPieceType();
                 boardStatus.getValidMoves().clear();
-                boardView.setCurrentBoardStatus(boardStatus.getCurrentBoardStatus());
+                boardView.setCurrentBoardStatus(boardStatus.getCurrentBoardStatus(), boardStatus.getValidMoves());
                 boardStatus.setCurrentTurn("Black");
                 boardView.setCurrentTurnLabel(boardStatus.getCurrentTurn());
             } else {

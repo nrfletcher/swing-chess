@@ -1,5 +1,6 @@
 package Graphics;
 
+import Game.Move;
 import Game.Piece;
 
 import javax.imageio.ImageIO;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /*  ChessBoard is our visual chess board representation
  *  Complex logic warranted a separate class
@@ -23,12 +25,15 @@ public class ChessBoard extends JPanel {
     private final Color lightSquareColor = new Color(163, 214, 245);
     private final Color darkSquareColor = new Color(102, 167, 197);
     private final Color backgroundColor = new Color(110, 160, 205);
+    private final Color validMoveColor = new Color(255, 60, 60, 147);
     private ActionListener buttonListener;
 
     private Piece[][] currentGameBoard;
     private JButton[][] boardButtons;
+    private ArrayList<Move> validMoves;
 
-    public ChessBoard(Piece[][] currentGameBoard) {
+    public ChessBoard(Piece[][] currentGameBoard, ArrayList<Move> validMoves) {
+        this.validMoves = validMoves;
         this.currentGameBoard = currentGameBoard;
         this.boardButtons = new JButton[8][8];
         setPreferredSize(new Dimension(700, 700));
@@ -43,6 +48,7 @@ public class ChessBoard extends JPanel {
         int height = getHeight();
         int squareSize = Math.min(width, height) / 8;
 
+        System.out.println("Repainting");
         // Draw the chess board squares
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
@@ -50,10 +56,21 @@ public class ChessBoard extends JPanel {
                 // New button for each position -> add event handler
                 JButton button = new JButton();
 
+                // Painting board background
                 if ((row + col) % 2 == 0) {
                     button.setBackground(lightSquareColor);
                 } else {
                     button.setBackground(darkSquareColor);
+                }
+
+                // Paint valid moves red for visibility and testing measures
+                if(validMoves != null && !validMoves.isEmpty()) {
+                    System.out.println("Does this ever happen?");
+                    for(Move move : validMoves) {
+                        if(row == move.getX() && col == move.getY()) {
+                            button.setBackground(validMoveColor);
+                        }
+                    }
                 }
 
                 try {
@@ -73,7 +90,7 @@ public class ChessBoard extends JPanel {
 
                         this.add(button);
                     } catch (Exception e) {
-                        System.out.println(e);
+                        System.err.println(e);
                     }
                 } catch (Exception e) {
                     System.err.println(e);
@@ -100,5 +117,9 @@ public class ChessBoard extends JPanel {
 
     public void setButtonListener(ActionListener actionListener) {
         this.buttonListener = actionListener;
+    }
+
+    public void setValidMoves(ArrayList<Move> moves) {
+        this.validMoves = moves;
     }
 }

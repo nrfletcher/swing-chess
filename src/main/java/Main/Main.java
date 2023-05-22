@@ -16,7 +16,7 @@ public class Main {
     public static void main(String[] args) {
 
         Board boardStatus = new Board();
-        BoardView boardView = new BoardView(new ChessBoard(boardStatus.getCurrentBoardStatus()));
+        BoardView boardView = new BoardView(new ChessBoard(boardStatus.getCurrentBoardStatus(), boardStatus.getValidMoves()));
         ChessController chessController = new ChessController(boardStatus, boardView);
 
     }
