@@ -1,9 +1,9 @@
 package Game;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
-/* @author nrileyfletcher
+/*
+ * @author nrileyfletcher
  * @brief Pawn piece implementation
  */
 public class Pawn implements Piece {
@@ -19,22 +19,37 @@ public class Pawn implements Piece {
         ArrayList<Move> legalMoves = new ArrayList<>();
         String color = currentBoard[row][col].getPieceColor();
 
-        /* work on this 5/21 (legal pawn moves) (also from now on do this pseudo code style much easier)
         if(color.equalsIgnoreCase("black")) {
+            if(currentBoard[row + 1][col + 1].
+                    getPieceColor().
+                    equalsIgnoreCase("white")) legalMoves.add(new Move(row + 1, col + 1));
+            if(currentBoard[row + 1][col - 1].
+                    getPieceColor().
+                    equalsIgnoreCase("white")) legalMoves.add(new Move(row + 1, col - 1));
             if(row == 1) {
-                if(currentBoard[row + 1][col].getPieceColor().equalsIgnoreCase("null")) legalMoves.add(new Move(row + 1, col));
-                if(currentBoard[row + 2][col].getPieceColor().equalsIgnoreCase("null")) legalMoves.add(new Move(row + 2, col));
-            } else {
-
+                if(currentBoard[row + 2][col].
+                        getPieceColor().
+                        equalsIgnoreCase("null")) legalMoves.add(new Move(row + 2, col));
             }
+            if(currentBoard[row + 1][col].
+                    getPieceColor().
+                    equalsIgnoreCase("null")) legalMoves.add(new Move(row + 1, col));
         } else {
+            if(currentBoard[row - 1][col - 1].
+                    getPieceColor().
+                    equalsIgnoreCase("black")) legalMoves.add(new Move(row - 1, col - 1));
+            if(currentBoard[row - 1][col + 1].
+                    getPieceColor().
+                    equalsIgnoreCase("black")) legalMoves.add(new Move(row - 1, col + 1));
             if(row == 6) {
-
-            } else {
-                if()
+                if(currentBoard[row - 2][col].
+                        getPieceColor().
+                        equalsIgnoreCase("null")) legalMoves.add(new Move(row - 2, col));
             }
+            if(currentBoard[row - 1][col].
+                    getPieceColor().
+                    equalsIgnoreCase("null")) legalMoves.add(new Move(row - 1, col));
         }
-        */
 
         return legalMoves;
     }

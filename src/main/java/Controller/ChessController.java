@@ -75,7 +75,13 @@ public class ChessController {
                 boardStatus.getCurrentBoardStatus()[row][col] = boardStatus.getLastPieceType();
                 boardStatus.getValidMoves().clear();
                 boardView.setCurrentBoardStatus(boardStatus.getCurrentBoardStatus(), boardStatus.getValidMoves());
-                boardStatus.setCurrentTurn("Black");
+
+                if (boardStatus.getCurrentTurn().equalsIgnoreCase("black")) {
+                    boardStatus.setCurrentTurn("White");
+                } else {
+                    boardStatus.setCurrentTurn("Black");
+                }
+
                 boardView.setCurrentTurnLabel(boardStatus.getCurrentTurn());
             } else {
                 System.out.println("Not our piece or valid move");

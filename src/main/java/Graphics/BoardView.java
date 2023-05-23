@@ -20,9 +20,9 @@ import java.util.ArrayList;
 
 public class BoardView extends JFrame {
 
-    private final Color lightBlue = new Color(163, 214, 245);
-    private final Color darkBlue = new Color(102, 167, 197);
-    private final Color backgroundColor = new Color(110, 160, 205);
+    private static final Color LIGHT_BLUE = new Color(163, 214, 245);
+    private static final Color DARK_BLUE = new Color(102, 167, 197);
+    private static final Color BACKGROUND_COLOR = new Color(110, 160, 205);
 
     JLabel scoreLabel;
     JLabel whiteScore;
@@ -45,11 +45,11 @@ public class BoardView extends JFrame {
         endGameButton = createEndGameButton();
         currentTurnLabel = createTurnLabel();
         this.chessBoard = chessBoard;
-        this.chessBoard.setBackground(backgroundColor);
+        this.chessBoard.setBackground(BACKGROUND_COLOR);
 
         // add -> panel, component, x, y, width, height
         gamePanel = new JPanel(new GridBagLayout());
-        gamePanel.setBackground(backgroundColor);
+        gamePanel.setBackground(BACKGROUND_COLOR);
 
         add(gamePanel, scoreLabel, 0, 0, 1, 1, 10);
         add(gamePanel, whiteScore, 0, 1, 1, 1, 10);
@@ -107,7 +107,7 @@ public class BoardView extends JFrame {
         JLabel label = new JLabel("Scores");
         label.setFont(new Font("Georgia", Font.BOLD, 45));
         label.setForeground(Color.getHSBColor(0.66f, 1.0f, 0.2f));
-        label.setBackground(lightBlue);
+        label.setBackground(LIGHT_BLUE);
         label.setOpaque(true);
         label.setVerticalAlignment(SwingConstants.CENTER);
         label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -118,7 +118,7 @@ public class BoardView extends JFrame {
         JLabel label = new JLabel("White Score: ");
         label.setFont(new Font("Georgia", Font.BOLD, 30));
         label.setForeground(Color.getHSBColor(0.66f, 1.0f, 0.2f));
-        label.setBackground(lightBlue);
+        label.setBackground(LIGHT_BLUE);
         label.setOpaque(true);
         return label;
     }
@@ -127,7 +127,7 @@ public class BoardView extends JFrame {
         JLabel label = new JLabel("Black Score: ");
         label.setFont(new Font("Georgia", Font.BOLD, 30));
         label.setForeground(Color.getHSBColor(0.66f, 1.0f, 0.2f));
-        label.setBackground(lightBlue);
+        label.setBackground(LIGHT_BLUE);
         label.setOpaque(true);
         return label;
     }
@@ -139,11 +139,11 @@ public class BoardView extends JFrame {
         String[] column = {"White","Black"};
         JTable table = new JTable(data, column);
         table.setFont(new Font("Georgia", Font.BOLD, 20));
-        table.setBackground(darkBlue);
-        table.setForeground(darkBlue);
-        table.setGridColor(darkBlue);
+        table.setBackground(DARK_BLUE);
+        table.setForeground(DARK_BLUE);
+        table.setGridColor(DARK_BLUE);
         scrollPane = new JScrollPane(table);
-        scrollPane.getViewport().setBackground(darkBlue);
+        scrollPane.getViewport().setBackground(DARK_BLUE);
         scrollPane.setFont(new Font("Georgia", Font.BOLD, 20));
         return scrollPane;
     }
@@ -152,7 +152,7 @@ public class BoardView extends JFrame {
         JLabel label = new JLabel("Moves");
         label.setFont(new Font("Georgia", Font.BOLD, 45));
         label.setForeground(Color.getHSBColor(0.66f, 1.0f, 0.2f));
-        label.setBackground(lightBlue);
+        label.setBackground(LIGHT_BLUE);
         label.setOpaque(true);
         label.setVerticalAlignment(SwingConstants.CENTER);
         label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -166,7 +166,7 @@ public class BoardView extends JFrame {
         button.setContentAreaFilled(false);
         button.setFont(new Font("Georgia", Font.BOLD, 30));
         button.setForeground(Color.getHSBColor(0.66f, 1.0f, 0.2f));
-        button.setBackground(lightBlue);
+        button.setBackground(LIGHT_BLUE);
         button.setOpaque(true);
         return button;
     }
@@ -175,7 +175,7 @@ public class BoardView extends JFrame {
         JLabel label = new JLabel("Current Turn: NULL");
         label.setFont(new Font("Georgia", Font.BOLD, 30));
         label.setForeground(Color.getHSBColor(0.66f, 1.0f, 0.2f));
-        label.setBackground(lightBlue);
+        label.setBackground(LIGHT_BLUE);
         label.setOpaque(true);
         label.setVerticalAlignment(SwingConstants.CENTER);
         label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -183,15 +183,18 @@ public class BoardView extends JFrame {
     }
 
     public void setCurrentBoardStatus(Piece[][] board, ArrayList<Move> moves) {
+        this.chessBoard.setBoard(board);
+        this.chessBoard.setValidMoves(moves);
         this.chessBoard.removeAll();
-        this.chessBoard = new ChessBoard(board, moves);
-        repaint();
+        this.chessBoard.repaint();
+        this.chessBoard.validate();
     }
 
     public void displayValidMoves(Piece[][] board, ArrayList<Move> validMoves) {
         this.chessBoard.setValidMoves(validMoves);
         this.chessBoard.removeAll();
         this.chessBoard = new ChessBoard(board, validMoves);
+        validate();
         repaint();
     }
 

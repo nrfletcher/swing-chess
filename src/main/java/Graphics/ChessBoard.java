@@ -22,10 +22,10 @@ import java.util.ArrayList;
 
 public class ChessBoard extends JPanel {
 
-    private final Color lightSquareColor = new Color(163, 214, 245);
-    private final Color darkSquareColor = new Color(102, 167, 197);
-    private final Color backgroundColor = new Color(110, 160, 205);
-    private final Color validMoveColor = new Color(255, 60, 60, 147);
+    private static final Color LIGHT_SQUARE_COLOR = new Color(163, 214, 245);
+    private static final Color DARK_SQUARE_COLOR = new Color(102, 167, 197);
+    private static final Color BACKGROUND_COLOR = new Color(110, 160, 205);
+    private static final Color VALID_MOVE_COLOR = new Color(255, 60, 60, 147);
     private ActionListener buttonListener;
 
     private Piece[][] currentGameBoard;
@@ -58,17 +58,19 @@ public class ChessBoard extends JPanel {
 
                 // Painting board background
                 if ((row + col) % 2 == 0) {
-                    button.setBackground(lightSquareColor);
+                    button.setBackground(LIGHT_SQUARE_COLOR);
                 } else {
-                    button.setBackground(darkSquareColor);
+                    button.setBackground(DARK_SQUARE_COLOR);
                 }
 
-                // Paint valid moves red for visibility and testing measures
+                /* Remove this after testing */
                 if(validMoves != null && !validMoves.isEmpty()) {
                     System.out.println("Does this ever happen?");
                     for(Move move : validMoves) {
                         if(row == move.getX() && col == move.getY()) {
-                            button.setBackground(validMoveColor);
+                            button.removeAll();
+                            button.repaint();
+                            button.setBackground(VALID_MOVE_COLOR);
                         }
                     }
                 }
@@ -121,5 +123,9 @@ public class ChessBoard extends JPanel {
 
     public void setValidMoves(ArrayList<Move> moves) {
         this.validMoves = moves;
+    }
+
+    public void setBoard(Piece[][] currentGameBoard) {
+        this.currentGameBoard = currentGameBoard;
     }
 }
