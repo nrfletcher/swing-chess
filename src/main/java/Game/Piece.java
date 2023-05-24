@@ -13,4 +13,5 @@ public interface Piece {
     int getPieceValue();
     String getPieceType();
     String getPieceColor();
+    boolean moveInBounds(Move move);
 }

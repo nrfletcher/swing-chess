@@ -18,36 +18,143 @@ public class Bishop implements Piece {
         ArrayList<Move> legalMoves = new ArrayList<>();
         String color = currentBoard[row][col].getPieceColor();
 
+        /* Beware hectic code; essentially just traversing each diagonal checking for nulls or pieces */
         if(color.equalsIgnoreCase("black")) {
-            if(currentBoard[row + 1][col + 1].
-                    getPieceColor().
-                    equalsIgnoreCase("white")) legalMoves.add(new Move(row + 1, col + 1));
-            if(currentBoard[row + 1][col - 1].
-                    getPieceColor().
-                    equalsIgnoreCase("white")) legalMoves.add(new Move(row + 1, col - 1));
-            if(row == 1) {
-                if(currentBoard[row + 2][col].
-                        getPieceColor().
-                        equalsIgnoreCase("null")) legalMoves.add(new Move(row + 2, col));
+            boolean seenPiece = false;
+            int counter = 1;
+
+            while(!seenPiece) {
+                if(moveInBounds(new Move(row + counter, col + counter)) && currentBoard[row + counter][col + counter].getPieceColor().equalsIgnoreCase("null")) {
+                    legalMoves.add(new Move(row + counter, col + counter));
+                    counter++;
+                } else {
+                    if(moveInBounds(new Move(row + counter, col + counter)) && currentBoard[row + counter][col + counter].getPieceColor().equalsIgnoreCase("black")) {
+                        seenPiece = true;
+                    } else {
+                        seenPiece = true;
+                        legalMoves.add(new Move(row + counter, col + counter));
+                    }
+                }
             }
-            if(currentBoard[row + 1][col].
-                    getPieceColor().
-                    equalsIgnoreCase("null")) legalMoves.add(new Move(row + 1, col));
+
+            seenPiece = false;
+            counter = 1;
+
+            while(!seenPiece) {
+                if(moveInBounds(new Move(row + counter, col - counter)) && currentBoard[row + counter][col - counter].getPieceColor().equalsIgnoreCase("null")) {
+                    legalMoves.add(new Move(row + counter, col - counter));
+                    counter++;
+                } else {
+                    if(moveInBounds(new Move(row + counter, col - counter)) && currentBoard[row + counter][col - counter].getPieceColor().equalsIgnoreCase("black")) {
+                        seenPiece = true;
+                    } else {
+                        seenPiece = true;
+                        legalMoves.add(new Move(row + counter, col + counter));
+                    }
+                }
+            }
+
+            seenPiece = false;
+            counter = 1;
+
+            while(!seenPiece) {
+                if(moveInBounds(new Move(row - counter, col + counter)) && currentBoard[row - counter][col + counter].getPieceColor().equalsIgnoreCase("null")) {
+                    legalMoves.add(new Move(row - counter, col + counter));
+                    counter++;
+                } else {
+                    if(moveInBounds(new Move(row - counter, col + counter)) && currentBoard[row - counter][col + counter].getPieceColor().equalsIgnoreCase("black")) {
+                        seenPiece = true;
+                    } else {
+                        seenPiece = true;
+                        legalMoves.add(new Move(row + counter, col + counter));
+                    }
+                }
+            }
+
+            seenPiece = false;
+            counter = 1;
+
+            while(!seenPiece) {
+                if(moveInBounds(new Move(row - counter, col - counter)) && currentBoard[row - counter][col - counter].getPieceColor().equalsIgnoreCase("null")) {
+                    legalMoves.add(new Move(row - counter, col - counter));
+                    counter++;
+                } else {
+                    if(moveInBounds(new Move(row - counter, col - counter)) && currentBoard[row - counter][col - counter].getPieceColor().equalsIgnoreCase("black")) {
+                        seenPiece = true;
+                    } else {
+                        seenPiece = true;
+                        legalMoves.add(new Move(row + counter, col + counter));
+                    }
+                }
+            }
         } else {
-            if(currentBoard[row - 1][col - 1].
-                    getPieceColor().
-                    equalsIgnoreCase("black")) legalMoves.add(new Move(row - 1, col - 1));
-            if(currentBoard[row - 1][col + 1].
-                    getPieceColor().
-                    equalsIgnoreCase("black")) legalMoves.add(new Move(row - 1, col + 1));
-            if(row == 6) {
-                if(currentBoard[row - 2][col].
-                        getPieceColor().
-                        equalsIgnoreCase("null")) legalMoves.add(new Move(row - 2, col));
+            boolean seenPiece = false;
+            int counter = 1;
+
+            while(!seenPiece) {
+                if(moveInBounds(new Move(row + counter, col + counter)) && currentBoard[row + counter][col + counter].getPieceColor().equalsIgnoreCase("null")) {
+                    legalMoves.add(new Move(row + counter, col + counter));
+                    counter++;
+                } else {
+                    if(moveInBounds(new Move(row + counter, col + counter)) && currentBoard[row + counter][col + counter].getPieceColor().equalsIgnoreCase("white")) {
+                        seenPiece = true;
+                    } else {
+                        seenPiece = true;
+                        legalMoves.add(new Move(row + counter, col + counter));
+                    }
+                }
             }
-            if(currentBoard[row - 1][col].
-                    getPieceColor().
-                    equalsIgnoreCase("null")) legalMoves.add(new Move(row - 1, col));
+
+            seenPiece = false;
+            counter = 1;
+
+            while(!seenPiece) {
+                if(moveInBounds(new Move(row + counter, col - counter)) && currentBoard[row + counter][col - counter].getPieceColor().equalsIgnoreCase("null")) {
+                    legalMoves.add(new Move(row + counter, col - counter));
+                    counter++;
+                } else {
+                    if(moveInBounds(new Move(row + counter, col - counter)) && currentBoard[row + counter][col - counter].getPieceColor().equalsIgnoreCase("white")) {
+                        seenPiece = true;
+                    } else {
+                        seenPiece = true;
+                        legalMoves.add(new Move(row + counter, col + counter));
+                    }
+                }
+            }
+
+            seenPiece = false;
+            counter = 1;
+
+            while(!seenPiece) {
+                if(moveInBounds(new Move(row - counter, col + counter)) && currentBoard[row - counter][col + counter].getPieceColor().equalsIgnoreCase("null")) {
+                    legalMoves.add(new Move(row - counter, col + counter));
+                    counter++;
+                } else {
+                    if(moveInBounds(new Move(row - counter, col + counter)) && currentBoard[row - counter][col + counter].getPieceColor().equalsIgnoreCase("white")) {
+                        seenPiece = true;
+                    } else {
+                        seenPiece = true;
+                        legalMoves.add(new Move(row + counter, col + counter));
+                    }
+                }
+            }
+
+            seenPiece = false;
+            counter = 1;
+
+            while(!seenPiece) {
+                if(moveInBounds(new Move(row - counter, col - counter)) && currentBoard[row - counter][col - counter].getPieceColor().equalsIgnoreCase("null")) {
+                    legalMoves.add(new Move(row - counter, col - counter));
+                    counter++;
+                } else {
+                    if(moveInBounds(new Move(row - counter, col - counter)) && currentBoard[row - counter][col - counter].getPieceColor().equalsIgnoreCase("white")) {
+                        seenPiece = true;
+                    } else {
+                        seenPiece = true;
+                        legalMoves.add(new Move(row + counter, col + counter));
+                    }
+                }
+            }
         }
 
         return legalMoves;
@@ -66,5 +173,10 @@ public class Bishop implements Piece {
     @Override
     public String getPieceColor() {
         return this.color;
+    }
+
+    @Override
+    public boolean moveInBounds(Move move) {
+        return move.getY() <= 7 && move.getY() >= 0 && move.getX() <= 7 && move.getX() >= 0;
     }
 }

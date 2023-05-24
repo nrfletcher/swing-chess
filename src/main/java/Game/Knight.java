@@ -33,4 +33,9 @@ public class Knight implements Piece {
     public String getPieceColor() {
         return this.color;
     }
+
+    @Override
+    public boolean moveInBounds(Move move) {
+        return false;
+    }
 }

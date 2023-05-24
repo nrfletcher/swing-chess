@@ -5,6 +5,7 @@ import Game.Empty;
 import Game.Move;
 import Game.Piece;
 import Graphics.BoardView;
+import Utils.AudioPlayer;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -67,9 +68,16 @@ public class ChessController {
                 }
 
                 boardView.setCurrentBoardStatus(boardStatus.getCurrentBoardStatus(), boardStatus.getValidMoves());
-
+            /*
+             * Complete: N/A
+             * First Iteration: Pawn
+             * Working on: Bishop, King, Queen, Knight, Rook
+             */
             } else if(boardStatus.isValidMove(new Move(row, col))) {
                 System.out.println("Valid move occurred");
+
+                AudioPlayer audioPlayer = new AudioPlayer();
+                audioPlayer.playPieceMoveSound();
 
                 boardStatus.getCurrentBoardStatus()[boardStatus.getLastX()][boardStatus.getLastY()] = new Empty();
                 boardStatus.getCurrentBoardStatus()[row][col] = boardStatus.getLastPieceType();
@@ -84,6 +92,8 @@ public class ChessController {
 
                 boardView.setCurrentTurnLabel(boardStatus.getCurrentTurn());
             } else {
+                AudioPlayer audioPlayer = new AudioPlayer();
+                audioPlayer.playMoveErrorSound();
                 System.out.println("Not our piece or valid move");
             }
         }

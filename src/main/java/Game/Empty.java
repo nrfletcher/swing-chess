@@ -29,4 +29,9 @@ public class Empty implements Piece {
     public String getPieceColor() {
         return "NULL";
     }
+
+    @Override
+    public boolean moveInBounds(Move move) {
+        return false;
+    }
 }
