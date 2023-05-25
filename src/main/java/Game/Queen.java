@@ -1,5 +1,8 @@
 package Game;
 
+import Utils.DiagonalCheck;
+import Utils.HorizontalCheck;
+
 import java.util.ArrayList;
 
 /* @author nrileyfletcher
@@ -13,10 +16,16 @@ public class Queen implements Piece {
         this.color = color;
     }
 
+    /* Utilize Rook + Bishop legal moves for queen */
     @Override
     public ArrayList<Move> getLegalMoves(Piece[][] currentBoard, int row, int col) {
-        ArrayList<Move> legalMoves = new ArrayList<>();
-        return legalMoves;
+        HorizontalCheck horizontalCheck = new HorizontalCheck(currentBoard, row, col);
+        DiagonalCheck diagonalCheck = new DiagonalCheck(currentBoard, row, col);
+        ArrayList<Move> horizontalMoves = horizontalCheck.getLegalHorizontalMoves();
+        ArrayList<Move> diagonalMoves = diagonalCheck.getLegalDiagonalMoves();
+        horizontalMoves.removeAll(diagonalMoves);
+        horizontalMoves.addAll(diagonalMoves);
+        return horizontalMoves;
     }
 
     @Override
@@ -36,6 +45,6 @@ public class Queen implements Piece {
 
     @Override
     public boolean moveInBounds(Move move) {
-        return false;
+        return move.getY() <= 7 && move.getY() >= 0 && move.getX() <= 7 && move.getX() >= 0;
     }
 }

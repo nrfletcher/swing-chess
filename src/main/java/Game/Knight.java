@@ -36,6 +36,6 @@ public class Knight implements Piece {
 
     @Override
     public boolean moveInBounds(Move move) {
-        return false;
+        return move.getY() <= 7 && move.getY() >= 0 && move.getX() <= 7 && move.getX() >= 0;
     }
 }

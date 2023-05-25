@@ -18,7 +18,6 @@ import java.util.ArrayList;
  * @author nrileyfletcher
  * @brief  Interaction between graphic and logic board representations
  */
-
 public class ChessController {
 
     private BoardView boardView;
@@ -38,7 +37,6 @@ public class ChessController {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            /* Get our button row and column */
             JButton clickedButton = (JButton) e.getSource();
             String pos = clickedButton.getName();
 
@@ -70,8 +68,8 @@ public class ChessController {
                 boardView.setCurrentBoardStatus(boardStatus.getCurrentBoardStatus(), boardStatus.getValidMoves());
             /*
              * Complete: N/A
-             * First Iteration: Pawn
-             * Working on: Bishop, King, Queen, Knight, Rook
+             * First Iteration: Pawn, Bishop, Rook, Queen
+             * Working on: King, Knight
              */
             } else if(boardStatus.isValidMove(new Move(row, col))) {
                 System.out.println("Valid move occurred");

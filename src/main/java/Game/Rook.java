@@ -1,5 +1,7 @@
 package Game;
 
+import Utils.HorizontalCheck;
+
 import java.util.ArrayList;
 
 /* @author nrileyfletcher
@@ -15,8 +17,8 @@ public class Rook implements Piece {
 
     @Override
     public ArrayList<Move> getLegalMoves(Piece[][] currentBoard, int row, int col) {
-        ArrayList<Move> legalMoves = new ArrayList<>();
-        return legalMoves;
+        HorizontalCheck horizontalCheck = new HorizontalCheck(currentBoard, row, col);
+        return horizontalCheck.getLegalHorizontalMoves();
     }
 
     @Override
@@ -36,6 +38,6 @@ public class Rook implements Piece {
 
     @Override
     public boolean moveInBounds(Move move) {
-        return false;
+        return move.getY() <= 7 && move.getY() >= 0 && move.getX() <= 7 && move.getX() >= 0;
     }
 }

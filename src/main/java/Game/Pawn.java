@@ -20,33 +20,33 @@ public class Pawn implements Piece {
         String color = currentBoard[row][col].getPieceColor();
 
         if(color.equalsIgnoreCase("black")) {
-            if(currentBoard[row + 1][col + 1].
+            if(moveInBounds(new Move(row + 1, col + 1)) && currentBoard[row + 1][col + 1].
                     getPieceColor().
                     equalsIgnoreCase("white")) legalMoves.add(new Move(row + 1, col + 1));
-            if(currentBoard[row + 1][col - 1].
+            if(moveInBounds(new Move(row + 1, col - 1)) && currentBoard[row + 1][col - 1].
                     getPieceColor().
                     equalsIgnoreCase("white")) legalMoves.add(new Move(row + 1, col - 1));
             if(row == 1) {
-                if(currentBoard[row + 2][col].
+                if(moveInBounds(new Move(row + 2, col)) && currentBoard[row + 2][col].
                         getPieceColor().
                         equalsIgnoreCase("null")) legalMoves.add(new Move(row + 2, col));
             }
-            if(currentBoard[row + 1][col].
+            if(moveInBounds(new Move(row + 1, col)) && currentBoard[row + 1][col].
                     getPieceColor().
                     equalsIgnoreCase("null")) legalMoves.add(new Move(row + 1, col));
         } else {
-            if(currentBoard[row - 1][col - 1].
+            if(moveInBounds(new Move(row - 1, col - 1)) && currentBoard[row - 1][col - 1].
                     getPieceColor().
                     equalsIgnoreCase("black")) legalMoves.add(new Move(row - 1, col - 1));
-            if(currentBoard[row - 1][col + 1].
+            if(moveInBounds(new Move(row - 1, col + 1)) && currentBoard[row - 1][col + 1].
                     getPieceColor().
                     equalsIgnoreCase("black")) legalMoves.add(new Move(row - 1, col + 1));
             if(row == 6) {
-                if(currentBoard[row - 2][col].
+                if(moveInBounds(new Move(row - 2, col)) && currentBoard[row - 2][col].
                         getPieceColor().
                         equalsIgnoreCase("null")) legalMoves.add(new Move(row - 2, col));
             }
-            if(currentBoard[row - 1][col].
+            if(moveInBounds(new Move(row - 1, col)) && currentBoard[row - 1][col].
                     getPieceColor().
                     equalsIgnoreCase("null")) legalMoves.add(new Move(row - 1, col));
         }
@@ -71,6 +71,6 @@ public class Pawn implements Piece {
 
     @Override
     public boolean moveInBounds(Move move) {
-        return false;
+        return move.getY() <= 7 && move.getY() >= 0 && move.getX() <= 7 && move.getX() >= 0;
     }
 }
