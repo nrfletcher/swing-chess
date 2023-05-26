@@ -16,6 +16,30 @@ public class Knight implements Piece {
     @Override
     public ArrayList<Move> getLegalMoves(Piece[][] currentBoard, int row, int col) {
         ArrayList<Move> legalMoves = new ArrayList<>();
+        String color = currentBoard[row][col].getPieceColor();
+        int[][] positions = {{-2, 1}, {-2, -1}, {-1, 2}, {-1, -2}, {2, 1}, {2, -1}, {1, -2}, {1, 2}};
+
+        /* Checks each unique (x, y) pair from positions array */
+        if(color.equalsIgnoreCase("black")) {
+            for(int i = 0; i < positions.length; i++) {
+                for(int j = 0; j < 1; j++) {
+                    if(moveInBounds(new Move(row + positions[i][j], col + positions[i][j+1])) &&
+                    !currentBoard[row + positions[i][j]][col + positions[i][j+1]].
+                            getPieceColor().
+                            equalsIgnoreCase("black")) legalMoves.add(new Move(row + positions[i][j], col + positions[i][j+1]));
+                }
+            }
+        } else {
+            for(int i = 0; i < positions.length; i++) {
+                for(int j = 0; j < 1; j++) {
+                    if(moveInBounds(new Move(row + positions[i][j], col + positions[i][j+1])) &&
+                            !currentBoard[row + positions[i][j]][col + positions[i][j+1]].
+                                    getPieceColor().
+                                    equalsIgnoreCase("white")) legalMoves.add(new Move(row + positions[i][j], col + positions[i][j+1]));
+                }
+            }
+        }
+
         return legalMoves;
     }
 

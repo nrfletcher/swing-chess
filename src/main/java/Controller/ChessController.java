@@ -66,34 +66,52 @@ public class ChessController {
                 }
 
                 boardView.setCurrentBoardStatus(boardStatus.getCurrentBoardStatus(), boardStatus.getValidMoves());
-            /*
-             * Complete: N/A
-             * First Iteration: Pawn, Bishop, Rook, Queen
-             * Working on: King, Knight
-             */
             } else if(boardStatus.isValidMove(new Move(row, col))) {
                 System.out.println("Valid move occurred");
-
                 AudioPlayer audioPlayer = new AudioPlayer();
-                audioPlayer.playPieceMoveSound();
 
-                boardStatus.getCurrentBoardStatus()[boardStatus.getLastX()][boardStatus.getLastY()] = new Empty();
-                boardStatus.getCurrentBoardStatus()[row][col] = boardStatus.getLastPieceType();
-                boardStatus.getValidMoves().clear();
-                boardView.setCurrentBoardStatus(boardStatus.getCurrentBoardStatus(), boardStatus.getValidMoves());
-
-                if (boardStatus.getCurrentTurn().equalsIgnoreCase("black")) {
-                    boardStatus.setCurrentTurn("White");
+                if(boardStatus.getCurrentBoardStatus()[row][col].getPieceType().equalsIgnoreCase("king")) {
+                    if(boardStatus.getCurrentBoardStatus()[row][col].getPieceColor().equalsIgnoreCase("white")) {
+                        boardStatus.setCurrentWhiteScore(boardStatus.getCurrentWhiteScore() + 1);
+                        boardView.setCurrentWhiteScore(boardStatus.getCurrentWhiteScore());
+                    } else {
+                        boardStatus.setCurrentBlackScore(boardStatus.getCurrentBlackScore() + 1);
+                        boardView.setCurrentBlackScore(boardStatus.getCurrentBlackScore());
+                    }
+                    audioPlayer.playVictorySound();
+                    endGame();
+                    System.out.println("Game over");
                 } else {
-                    boardStatus.setCurrentTurn("Black");
-                }
+                    boardView.addMoveToTable(boardStatus.
+                            getCurrentBoardStatus()[boardStatus.getLastX()][boardStatus.getLastY()], new Move(row, col));
 
-                boardView.setCurrentTurnLabel(boardStatus.getCurrentTurn());
+                    audioPlayer.playPieceMoveSound();
+
+                    boardStatus.getCurrentBoardStatus()[boardStatus.getLastX()][boardStatus.getLastY()] = new Empty();
+                    boardStatus.getCurrentBoardStatus()[row][col] = boardStatus.getLastPieceType();
+                    boardStatus.getValidMoves().clear();
+                    boardView.setCurrentBoardStatus(boardStatus.getCurrentBoardStatus(), boardStatus.getValidMoves());
+
+                    if (boardStatus.getCurrentTurn().equalsIgnoreCase("black")) {
+                        boardStatus.setCurrentTurn("White");
+                    } else {
+                        boardStatus.setCurrentTurn("Black");
+                    }
+
+                    boardView.setCurrentTurnLabel(boardStatus.getCurrentTurn());
+                }
             } else {
                 AudioPlayer audioPlayer = new AudioPlayer();
                 audioPlayer.playMoveErrorSound();
                 System.out.println("Not our piece or valid move");
             }
         }
+    }
+
+    private void endGame() {
+        this.boardView.createEndGamePopup();
+        this.boardStatus.newGamePiecePositions();
+        this.boardView.setCurrentBoardStatus(boardStatus.getCurrentBoardStatus(), new ArrayList<>());
+        this.boardView.resetMoveTable();
     }
 }

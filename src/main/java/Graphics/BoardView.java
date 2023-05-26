@@ -5,7 +5,10 @@ import Game.Piece;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -30,10 +33,11 @@ public class BoardView extends JFrame {
     JLabel movesLabel;
     JScrollPane moveTable;
     JButton endGameButton;
-
     JLabel currentTurnLabel;
     ChessBoard chessBoard;
     JPanel gamePanel;
+    JTable table;
+    DefaultTableModel defaultTableModel;
 
     public BoardView(ChessBoard chessBoard) {
 
@@ -47,7 +51,6 @@ public class BoardView extends JFrame {
         this.chessBoard = chessBoard;
         this.chessBoard.setBackground(BACKGROUND_COLOR);
 
-        // add -> panel, component, x, y, width, height
         gamePanel = new JPanel(new GridBagLayout());
         gamePanel.setBackground(BACKGROUND_COLOR);
 
@@ -134,13 +137,11 @@ public class BoardView extends JFrame {
 
     public JScrollPane createMovesTable() {
         JScrollPane scrollPane;
-        String[][] data = { {"",""},
-                };
-        String[] column = {"White","Black"};
-        JTable table = new JTable(data, column);
-        table.setFont(new Font("Georgia", Font.BOLD, 20));
+        defaultTableModel = new DefaultTableModel();
+        defaultTableModel.addColumn("White");
+        defaultTableModel.addColumn("Black");
+        table = new JTable(defaultTableModel);
         table.setBackground(DARK_BLUE);
-        table.setForeground(DARK_BLUE);
         table.setGridColor(DARK_BLUE);
         scrollPane = new JScrollPane(table);
         scrollPane.getViewport().setBackground(DARK_BLUE);
@@ -198,6 +199,34 @@ public class BoardView extends JFrame {
         repaint();
     }
 
+    public void addMoveToTable(Piece piece, Move move) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        String data = piece.getPieceType();
+
+        String[] values = {"A", "B", "C", "D", "E", "F", "G"};
+        String x = Integer.toString(move.getX());
+        String y = values[move.getY()];
+        String[] input;
+
+        if(piece.getPieceColor().equalsIgnoreCase("white")) {
+            input = new String[]{data + " " + y + " " + x, ""};
+
+        } else {
+            input = new String[]{"", data + " " + y + " " + x};
+        }
+        model.addRow(input);
+        repaint();
+    }
+
+    public void resetMoveTable() {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+    }
+
+    public void createEndGamePopup() {
+        JOptionPane.showMessageDialog(null, "Game Over");
+    }
+
     public ChessBoard getCurrentBoardStatus() {
         return this.chessBoard;
     }
@@ -207,10 +236,12 @@ public class BoardView extends JFrame {
     }
 
     public void setCurrentBlackScore(int score) {
+        System.out.println(score);
         this.whiteScore.setText("White Score: " + score);
     }
 
     public void setCurrentWhiteScore(int score) {
+        System.out.println(score);
         this.blackScore.setText("Black Score: " + score);
     }
 

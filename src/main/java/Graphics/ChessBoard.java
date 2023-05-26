@@ -48,7 +48,6 @@ public class ChessBoard extends JPanel {
         int height = getHeight();
         int squareSize = Math.min(width, height) / 8;
 
-        System.out.println("Repainting");
         // Draw the chess board squares
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
@@ -65,7 +64,6 @@ public class ChessBoard extends JPanel {
 
                 /* Remove this after testing */
                 if(validMoves != null && !validMoves.isEmpty()) {
-                    System.out.println("Does this ever happen?");
                     for(Move move : validMoves) {
                         if(row == move.getX() && col == move.getY()) {
                             button.removeAll();
