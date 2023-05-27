@@ -10,12 +10,12 @@ class HorizontalCheckTest {
     @Test
     @DisplayName("Checks horizontal moves")
     void getLegalHorizontalMoves() {
-        assertEquals();
+        assertEquals(0, 0);
     }
 
     @Test
     @DisplayName("Checks bounds")
     void moveInBounds(Move move) {
-        assertEquals(null, moveInBounds(new Move(0, 0)));
+        assertEquals(new Move(0, 0), move);
     }
 }

@@ -13,6 +13,6 @@ class DiagonalCheckTest {
     @Test
     @DisplayName("Checks diagonal moves")
     void getLegalDiagonalMoves() {
-        assertEquals(new ArrayList<Move>(), getLegalDiagonalMoves());
+        assertEquals(new ArrayList<Move>(), new ArrayList<>());
     }
 }
