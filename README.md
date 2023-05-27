@@ -12,6 +12,7 @@ cd swing-chess
 cd gchess_jar
 java -jar gchess.jar
 ```
+Or via file explorer or dragging the JAR onto the desktop simple double click like an .exe
 # Architecture
 This project utilizes the MVC (Model View Controller) design pattern
 * Model -> Gane.Board
