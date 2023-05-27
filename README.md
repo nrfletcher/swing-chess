@@ -12,10 +12,9 @@ cd swing-chess
 cd gchess_jar
 java -jar gchess.jar
 ```
-Or via file explorer or dragging the JAR onto the desktop simple double click like an .exe
 # Architecture
 This project utilizes the MVC (Model View Controller) design pattern
-* Model -> Gane.Board
+* Model -> Game.Board
 * View -> Graphics.BoardView
 * Controller -> Controller.ChessController
 
@@ -30,7 +29,7 @@ Each package serves a unique purpose but adheres to MVC pattern overall
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/L1fNI0Gi7kI/0.jpg)](https://www.youtube.com/watch?v=L1fNI0Gi7kI)
 
 # Requirements
-This project was built using Gradle and thus requires the following to work completely:
+This project was built using Gradle and thus requires the following to build and run tests properly:
 * Java JDK 17 or higher
 * Java Swing
 * Gradle 7.2
