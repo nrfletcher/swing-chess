@@ -17,6 +17,7 @@ This project utilizes the MVC (Model View Controller) design pattern
 * Model -> Gane.Board
 * View -> Graphics.BoardView
 * Controller -> Controller.ChessController
+
 Each package serves a unique purpose but adheres to MVC pattern overall
 * Controller -> Contains controller
 * Game -> Contains logic implementation, separating concerns to each piece type
@@ -26,3 +27,10 @@ Each package serves a unique purpose but adheres to MVC pattern overall
 
 # Demo 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/L1fNI0Gi7kI/0.jpg)](https://www.youtube.com/watch?v=L1fNI0Gi7kI)
+
+# Requirements
+This project was built using Gradle and thus requires the following to work completely:
+* Java JDK 17 or higher
+* Java Swing
+* Gradle 7.2
+* JUnit 5.8.1
