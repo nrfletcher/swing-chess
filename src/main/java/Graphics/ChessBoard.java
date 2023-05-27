@@ -68,7 +68,6 @@ public class ChessBoard extends JPanel {
                         if(row == move.getX() && col == move.getY()) {
                             button.removeAll();
                             button.repaint();
-                            button.setBackground(VALID_MOVE_COLOR);
                         }
                     }
                 }

@@ -47,10 +47,7 @@ public class ChessController {
             String pieceType = boardStatus.getCurrentBoardStatus()[row][col].getPieceType();
             String pieceColor = boardStatus.getCurrentBoardStatus()[row][col].getPieceColor();
 
-            System.out.println(row + " " + col);
-
             if(boardStatus.getCurrentTurn().equalsIgnoreCase(pieceColor)) {
-                System.out.println("Current color");
                 boardStatus.setLastX(row);
                 boardStatus.setLastY(col);
                 boardStatus.setLastPieceType(piece);
@@ -61,13 +58,11 @@ public class ChessController {
                         getLegalMoves(boardStatus.getCurrentBoardStatus(), row, col);
 
                 for(Move move : legalMoves) {
-                    System.out.println(move);
                     boardStatus.getValidMoves().add(move);
                 }
 
                 boardView.setCurrentBoardStatus(boardStatus.getCurrentBoardStatus(), boardStatus.getValidMoves());
             } else if(boardStatus.isValidMove(new Move(row, col))) {
-                System.out.println("Valid move occurred");
                 AudioPlayer audioPlayer = new AudioPlayer();
 
                 if(boardStatus.getCurrentBoardStatus()[row][col].getPieceType().equalsIgnoreCase("king")) {
@@ -79,8 +74,7 @@ public class ChessController {
                         boardView.setCurrentBlackScore(boardStatus.getCurrentBlackScore());
                     }
                     audioPlayer.playVictorySound();
-                    endGame();
-                    System.out.println("Game over");
+                    endGame(boardStatus.getCurrentBoardStatus()[row][col].getPieceColor());
                 } else {
                     boardView.addMoveToTable(boardStatus.
                             getCurrentBoardStatus()[boardStatus.getLastX()][boardStatus.getLastY()], new Move(row, col));
@@ -103,13 +97,12 @@ public class ChessController {
             } else {
                 AudioPlayer audioPlayer = new AudioPlayer();
                 audioPlayer.playMoveErrorSound();
-                System.out.println("Not our piece or valid move");
             }
         }
     }
 
-    private void endGame() {
-        this.boardView.createEndGamePopup();
+    private void endGame(String color) {
+        this.boardView.createEndGamePopup(color);
         this.boardStatus.newGamePiecePositions();
         this.boardView.setCurrentBoardStatus(boardStatus.getCurrentBoardStatus(), new ArrayList<>());
         this.boardView.resetMoveTable();

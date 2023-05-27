@@ -223,8 +223,12 @@ public class BoardView extends JFrame {
         model.setRowCount(0);
     }
 
-    public void createEndGamePopup() {
-        JOptionPane.showMessageDialog(null, "Game Over");
+    public void createEndGamePopup(String color) {
+        if(color.equalsIgnoreCase("black")) {
+            JOptionPane.showMessageDialog(null, "White wins!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Black wins!");
+        }
     }
 
     public ChessBoard getCurrentBoardStatus() {
@@ -236,12 +240,10 @@ public class BoardView extends JFrame {
     }
 
     public void setCurrentBlackScore(int score) {
-        System.out.println(score);
         this.whiteScore.setText("White Score: " + score);
     }
 
     public void setCurrentWhiteScore(int score) {
-        System.out.println(score);
         this.blackScore.setText("Black Score: " + score);
     }
 
