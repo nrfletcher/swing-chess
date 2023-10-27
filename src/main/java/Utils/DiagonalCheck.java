@@ -25,7 +25,7 @@ public class DiagonalCheck {
         ArrayList<Move> legalMoves = new ArrayList<>();
         String color = currentBoard[row][col].getPieceColor();
 
-        /* Beware hectic code; essentially just traversing each diagonal checking for nulls or pieces */
+        /* Diagonal checking (YES IM AWARE THIS IS AWFUL CODE BARE WITH ME) */
         if(color.equalsIgnoreCase("black")) {
             boolean seenPiece = false;
             int counter = 1;
