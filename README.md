@@ -1,9 +1,9 @@
 # Swing Chess
 A Java Swing based chess application
 
-This implementation is a standalone program meant to be played on a single computer
+This implementation is a standalone program meant to be played by two users on the same machine
 
-Further versions may include networked version or a simple CPU bot
+A networked version may be developed, but probably not since I have little interest in ever touching JavaFX again unless I'm forced to
 # How to run the program
 You must have a Java JDK installed (this particular project built in 17.0.3.1)
 ```
