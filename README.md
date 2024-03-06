@@ -3,7 +3,7 @@ A Java Swing based chess application
 
 This implementation is a standalone program meant to be played by two users on the same machine
 
-A networked version may be developed, but probably not since I have little interest in ever touching JavaFX again unless I'm forced to
+Will probably never extend this as I wish to stay as far away from Java GUI libraries as possible
 # How to run the program
 You must have a Java JDK installed (this particular project built in 17.0.3.1)
 ```
